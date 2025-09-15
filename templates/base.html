@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>{% block title %}Broker{% endblock %}</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-50 min-h-screen">
+  <nav class="bg-white shadow">
+    <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+      <!-- Logo / Name -->
+      <div class="text-xl font-bold text-indigo-700">
+        Simple Broker
+      </div>
+
+      <!-- Hamburger (mobile only) -->
+      <button id="menu-btn" class="md:hidden text-gray-600 text-2xl focus:outline-none">
+        ☰
+      </button>
+
+      <!-- Desktop links -->
+      <div class="hidden md:flex space-x-4">
+        {% if session.get('user_id') %}
+          <a href="{{ url_for('dashboard.dashboard') }}"
+             class="bg-blue-600 text-white px-3 py-1 rounded hover:bg-blue-700 transition-colors">
+            Dashboard
+          </a>
+          <a href="{{ url_for('dashboard.profile') }}"
+             class="bg-blue-600 text-white px-3 py-1 rounded hover:bg-blue-700 transition-colors">
+            Profile
+          </a>
+          <a href="{{ url_for('auth.logout') }}"
+             class="bg-red-600 text-white px-3 py-1 rounded hover:bg-red-700 transition-colors">
+            Logout
+          </a>
+        {% else %}
+          <a href="{{ url_for('auth.login') }}"
+             class="bg-blue-600 text-white px-3 py-1 rounded hover:bg-blue-700 transition-colors">
+            Login
+          </a>
+          <a href="{{ url_for('auth.register') }}"
+             class="bg-blue-600 text-white px-3 py-1 rounded hover:bg-blue-700 transition-colors">
+            Register
+          </a>
+        {% endif %}
+      </div>
+    </div>
+
+    <!-- Mobile dropdown -->
+    <div id="mobile-menu" class="hidden md:hidden px-4 pb-4 space-y-2">
+      {% if session.get('user_id') %}
+        <a href="{{ url_for('dashboard.dashboard') }}"
+           class="block bg-blue-600 text-white px-3 py-2 rounded hover:bg-blue-700 transition-colors">
+          Dashboard
+        </a>
+        <a href="{{ url_for('dashboard.profile') }}"
+           class="block bg-blue-600 text-white px-3 py-2 rounded hover:bg-blue-700 transition-colors">
+          Profile
+        </a>
+        <a href="{{ url_for('auth.logout') }}"
+           class="block bg-red-600 text-white px-3 py-2 rounded hover:bg-red-700 transition-colors">
+          Logout
+        </a>
+      {% else %}
+        <a href="{{ url_for('auth.login') }}"
+           class="block bg-blue-600 text-white px-3 py-2 rounded hover:bg-blue-700 transition-colors">
+          Login
+        </a>
+        <a href="{{ url_for('auth.register') }}"
+           class="block bg-blue-600 text-white px-3 py-2 rounded hover:bg-blue-700 transition-colors">
+          Register
+        </a>
+      {% endif %}
+    </div>
+  </nav>
+
+  <main class="container mx-auto px-4 py-8">
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        <div class="mb-4">
+          {% for m in messages %}
+            <div class="bg-yellow-100 border-l-4 border-yellow-500 text-yellow-700 p-4 mb-2">
+              {{ m }}
+            </div>
+          {% endfor %}
+        </div>
+      {% endif %}
+    {% endwith %}
+
+    {% block content %}{% endblock %}
+  </main>
+
+  <script>
+    const btn = document.getElementById("menu-btn");
+    const menu = document.getElementById("mobile-menu");
+
+    btn.addEventListener("click", () => {
+      menu.classList.toggle("hidden");
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% block title %}Dashboard — Simple Broker{% endblock %}
+
+{% block content %}
+  <div class="max-w-3xl mx-auto">
+    <!-- Header -->
+    <div class="flex justify-between items-start mb-6">
+      <div>
+        <h2 class="text-2xl font-bold">Dashboard</h2>
+        <p class="text-gray-600">Welcome, {{ firstname.capitalize() }}</p>
+      </div>
+    </div>
+
+    <div class="bg-white p-6 rounded-xl shadow mb-6">
+      <h3 class="text-lg font-medium">Your Balance</h3>
+      <p class="text-4xl font-bold text-green-600 mt-3">
+        ${{ "%.2f"|format(balance) }}
+      </p>
+      <p class="text-sm text-gray-500 mt-2">USD</p>
+    </div>
+
+    <!-- Action Buttons -->
+    <div class="flex gap-4 flex-wrap">
+      <!-- Success (WhatsApp) -->
+      <a href="{{ whatsapp_link }}" target="_blank" rel="noopener noreferrer"
+         class="bg-green-600 text-white px-6 py-3 rounded-lg shadow hover:bg-green-700 transition-colors">
+        Message Admin on WhatsApp
+      </a>
+
+      <!-- Secondary (Edit Profile) -->
+      <a href="{{ url_for('dashboard.edit', user_id=userid) }}"
+         class="bg-gray-600 text-white px-6 py-3 rounded-lg shadow hover:bg-gray-700 transition-colors">
+        Edit Profile
+      </a>
+
+      <a href="{{ url_for('dashboard.withdraw', id=id) }}"
+         class="bg-red-600 text-white px-6 py-3 rounded-lg shadow hover:bg-red-700 transition-colors">
+        Withdraw
+      </a>
+    </div>
+  </div>
+{% endblock %}

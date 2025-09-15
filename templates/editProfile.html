@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block title %}Edit Profile — Broker{% endblock %}
+
+{% block content %}
+  <div class="max-w-md mx-auto bg-white p-8 rounded-xl shadow">
+    <h2 class="text-2xl font-bold mb-4">Edit Profile</h2>
+
+    <form method="post" action="{{ url_for('dashboard.edit', user_id=profile.userid) }}" class="space-y-3">
+      <input name="firstname" required value="{{ profile.firstname }}" placeholder="First name" class="w-full border rounded-lg p-2" />
+      <input name="lastname" required value="{{ profile.lastname }}" placeholder="Last name" class="w-full border rounded-lg p-2" />
+      <input name="lastname" required value="{{ profile.email }}" placeholder="Email" class="w-full border rounded-lg p-2" />
+      <input name="phone" value="{{ profile.phone or '' }}" placeholder="Phone" class="w-full border rounded-lg p-2" />
+      <input name="address" value="{{ profile.address or '' }}" placeholder="Address" class="w-full border rounded-lg p-2" />
+      <input name="nationality" value="{{ profile.nationality or '' }}" placeholder="Nationality" class="w-full border rounded-lg p-2" />
+
+      <div class="flex gap-3">
+        <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded">Save</button>
+        <a href="{{ url_for('dashboard.profile') }}" class="bg-gray-200 px-4 py-2 rounded">Cancel</a>
+      </div>
+    </form>
+  </div>
+{% endblock %}

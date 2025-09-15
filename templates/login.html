@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block title %}Login — Broker{% endblock %}
+
+{% block content %}
+  <div class="max-w-lg mx-auto bg-white p-12 rounded-xl shadow-lg">
+    <h2 class="text-3xl font-bold mb-6 text-center">Login</h2>
+    <form method="post" action="{{ url_for('auth.login') }}" class="space-y-4">
+      <input type="email" name="email" required placeholder="Email"
+             class="w-full border border-gray-300 focus:border-blue-500 focus:ring-1 focus:ring-blue-500 rounded-lg p-4 text-lg" />
+      <input type="password" name="password" required placeholder="Password"
+             class="w-full border border-gray-300 focus:border-blue-500 focus:ring-1 focus:ring-blue-500 rounded-lg p-4 text-lg" />
+
+      <!-- Primary Button: Blue -->
+      <button type="submit"
+              class="w-full bg-blue-600 text-white p-4 rounded-lg font-semibold text-lg hover:bg-blue-700 transition-colors">
+        Login
+      </button>
+    </form>
+
+    <p class="text-sm mt-6 text-center">
+      No account?
+      <a href="{{ url_for('auth.register') }}"
+         class="text-blue-600 font-medium hover:underline hover:text-blue-700">
+        Register
+      </a>
+    </p>
+  </div>
+{% endblock %}

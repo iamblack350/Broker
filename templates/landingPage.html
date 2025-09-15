@@ -1,0 +1,105 @@
+{% extends "base.html" %}
+{% block title %}Welcome — Simple Broker{% endblock %}
+
+{% block content %}
+<!-- Hero Section with Sliding Background -->
+<div id="hero" class="relative bg-gradient-to-r from-blue-600 to-indigo-700 min-h-screen flex items-center justify-center transition-all duration-1000">
+  <!-- Background image overlay -->
+  <div class="absolute inset-0 overflow-hidden">
+    <img id="hero-img" src="{{ url_for('static', filename='images/girl.png') }}" alt="Crypto Lady" class="w-full h-full object-cover opacity-20 transition-opacity duration-1000">
+  </div>
+
+  <!-- Hero content -->
+  <div class="relative z-10 text-center max-w-4xl px-6">
+    <h1 class="text-5xl md:text-6xl font-bold mb-6 text-white drop-shadow-lg">Welcome to Simple Broker</h1>
+    <p class="text-lg md:text-xl mb-8 text-white/90 max-w-2xl mx-auto drop-shadow-md">
+      Track your USD balance in real-time, manage your investments, and message admin instantly via WhatsApp.
+    </p>
+    <div class="flex flex-col sm:flex-row gap-4 justify-center">
+      <a href="{{ url_for('auth.login') }}" class="bg-white text-blue-700 px-8 py-3 rounded-lg font-semibold hover:bg-blue-100 transition">Login</a>
+      <a href="{{ url_for('auth.register') }}" class="bg-yellow-400 text-black px-8 py-3 rounded-lg font-semibold hover:bg-yellow-500 transition">Register</a>
+    </div>
+
+    <!-- Crypto icons / decoration -->
+    <div class="mt-12 flex justify-center gap-6 text-white/70">
+      <img src="{{ url_for('static', filename='images/bitcoin-icon.png') }}" class="w-10 h-10 animate-bounce" alt="Bitcoin">
+      <img src="{{ url_for('static', filename='images/ethereum-icon.png') }}" class="w-10 h-10 animate-bounce delay-200" alt="Ethereum">
+      <img src="{{ url_for('static', filename='images/usdt-icon.png') }}" class="w-10 h-10 animate-bounce delay-400" alt="USDT">
+    </div>
+  </div>
+</div>
+
+<!-- Hero Background Slideshow Script -->
+<script>
+  const heroImages = [
+    "{{ url_for('static', filename='images/girl.png') }}",
+    "{{ url_for('static', filename='images/crypto1.jpg') }}",
+    "{{ url_for('static', filename='images/crypto2.jpg') }}"
+  ];
+  let index = 0;
+  const heroImg = document.getElementById('hero-img');
+
+  setInterval(() => {
+    index = (index + 1) % heroImages.length;
+    heroImg.style.opacity = 0;
+    setTimeout(() => {
+      heroImg.src = heroImages[index];
+      heroImg.style.opacity = 0.2; // keep the overlay opacity
+    }, 500);
+  }, 5000); // every 5 seconds
+</script>
+
+<!-- Investment Plans Section (Grid Layout) -->
+<section class="container mx-auto px-4 py-16">
+  <h2 class="text-3xl font-bold text-center mb-12 text-gray-800">Our Investment Plans</h2>
+  <div class="grid gap-8 md:grid-cols-4">
+    <!-- Bronze Plan -->
+    <div class="bg-amber-100 rounded-lg shadow p-6 text-center hover:shadow-lg transition">
+      <h3 class="text-xl font-semibold mb-2 text-amber-800">Bronze</h3>
+      <p class="text-3xl font-bold mb-4 text-amber-900">$500</p>
+      <ul class="text-amber-700 mb-4 space-y-2">
+        <li>Basic trading access</li>
+        <li>Monthly insights</li>
+        <li>1 portfolio</li>
+      </ul>
+      <a href="{{ url_for('auth.login') }}" class="bg-amber-600 text-white px-4 py-2 rounded hover:bg-amber-700 transition">Choose Plan</a>
+    </div>
+
+    <!-- Silver Plan -->
+    <div class="bg-gray-200 rounded-lg shadow p-6 text-center hover:shadow-lg transition">
+      <h3 class="text-xl font-semibold mb-2 text-gray-800">Silver</h3>
+      <p class="text-3xl font-bold mb-4 text-gray-900">$1,500</p>
+      <ul class="text-gray-700 mb-4 space-y-2">
+        <li>Advanced trading access</li>
+        <li>Weekly insights</li>
+        <li>3 portfolios</li>
+      </ul>
+      <a href="{{ url_for('auth.login') }}" class="bg-gray-800 text-white px-4 py-2 rounded hover:bg-gray-900 transition">Choose Plan</a>
+    </div>
+
+    <!-- Gold Plan -->
+    <div class="bg-yellow-100 rounded-lg shadow p-6 text-center hover:shadow-lg transition">
+      <h3 class="text-xl font-semibold mb-2 text-yellow-800">Gold</h3>
+      <p class="text-3xl font-bold mb-4 text-yellow-900">$5,000</p>
+      <ul class="text-yellow-700 mb-4 space-y-2">
+        <li>Premium trading access</li>
+        <li>Daily insights</li>
+        <li>5 portfolios</li>
+      </ul>
+      <a href="{{ url_for('auth.login') }}" class="bg-yellow-600 text-white px-4 py-2 rounded hover:bg-yellow-700 transition">Choose Plan</a>
+    </div>
+
+    <!-- Platinum Plan -->
+    <div class="bg-purple-100 rounded-lg shadow p-6 text-center hover:shadow-lg transition">
+      <h3 class="text-xl font-semibold mb-2 text-purple-800">Platinum</h3>
+      <p class="text-3xl font-bold mb-4 text-purple-900">$10,000</p>
+      <ul class="text-purple-700 mb-4 space-y-2">
+        <li>All-inclusive trading access</li>
+        <li>Personalized insights</li>
+        <li>Unlimited portfolios</li>
+      </ul>
+      <a href="{{ url_for('auth.login') }}" class="bg-purple-600 text-white px-4 py-2 rounded hover:bg-purple-700 transition">Choose Plan</a>
+    </div>
+  </div>
+</section>
+{% endblock %}

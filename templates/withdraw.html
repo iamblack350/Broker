@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+
+{% block title %}Withdraw Funds — Simple Broker{% endblock %}
+
+{% block content %}
+  <div class="max-w-lg mx-auto bg-white shadow-lg rounded-xl p-8">
+    <h2 class="text-2xl font-bold text-gray-800 mb-6">Withdraw Funds</h2>
+
+
+    <div class="bg-indigo-50 border border-indigo-200 rounded-lg p-4 mb-6">
+      <p class="text-gray-600">Available Balance</p>
+      <p class="text-2xl font-semibold text-indigo-700">${{ balance }}</p>
+    </div>
+
+
+    <form method="post" action="{{ url_for('dashboard.withdraw') }}" class="space-y-4">
+
+      <div>
+        <label class="block text-gray-700 font-medium mb-1">Amount</label>
+        <input type="number" name="amount" min="10" required
+          class="w-full border rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" 
+          placeholder="Enter amount to withdraw">
+      </div>
+
+      <div>
+        <label class="block text-gray-700 font-medium mb-1">Payment Method</label>
+        <select name="method" required
+          class="w-full border rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500">
+          <option value="" disabled selected>Select a method</option>
+          <option value="bank">Bank Transfer</option>
+          <option value="bitcoin">Bitcoin</option>
+          <option value="usdt">USDT (Tether)</option>
+          <option value="ethereum">Ethereum</option>
+        </select>
+      </div>
+
+      <div>
+        <label class="block text-gray-700 font-medium mb-1">Wallet / Account Details</label>
+        <input type="text" name="wallet" required
+          class="w-full border rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+          placeholder="Enter wallet address or account number">
+      </div>
+
+      <div class="pt-4">
+        <button type="submit"
+          class="w-full bg-blue-600 text-white font-medium py-2 rounded-lg hover:bg-blue-700 transition">
+          Submit Withdrawal
+        </button>
+      </div>
+    </form>
+  </div>
+{% endblock %}
