@@ -2,7 +2,7 @@ import psycopg2
 from flask import Blueprint, flash, request, redirect, render_template, session, url_for, jsonify
 from sqlalchemy.exc import DatabaseError
 
-from database import get_conn
+from core.database import get_conn
 
 dashboard_bp = Blueprint("dashboard", __name__, template_folder="templates")
 
@@ -164,3 +164,12 @@ def withdraw():
         conn.rollback()
         conn.close()
     return render_template("withdraw.html", balance=detail[0])
+
+@dashboard_bp.route("/upload-img")
+def upload_picture():
+    return jsonify(Pic = "Select a picture to upload", Cam_Pic = "Use Camera")
+
+@dashboard_bp.route("/change-password")
+def change_password():
+    return jsonify(Warning = "Are you sure you want to change password?")
+

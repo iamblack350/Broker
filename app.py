@@ -1,17 +1,17 @@
 from flask import Flask, render_template
 import os
 from dotenv import load_dotenv
-from dashboard import dashboard_bp
-from auth import auth_bp
-from database import init_db
-
+from Blueprints.dashboard import dashboard_bp
+from Blueprints.auth import auth_bp
+from core.database import init_db
 
 load_dotenv()
 app = Flask(__name__)
 app.secret_key = os.environ.get("SECRET_KEY", "dev_secret")
 
+
 @app.route("/")
-def landingPage():
+def landing_page():
     return render_template("landingPage.html")
 
 app.register_blueprint(auth_bp, url_prefix="/auth")

@@ -1,8 +1,7 @@
 from flask import Blueprint, flash, render_template, request, session, redirect, url_for
 import bcrypt
-from psycopg2 import errors
 import psycopg2
-from database import get_conn
+from core.database import get_conn
 
 
 
@@ -92,3 +91,7 @@ def logout():
     session.pop("email", None)
     session.pop("user_id", None)
     return redirect(url_for("auth.login"))
+
+@auth_bp.route("/forgotten-password")
+def forgotten_password():
+    pass
